@@ -1,0 +1,65 @@
+version: '3.7'
+
+services:
+  node-nuxt:
+    build:
+      # Для целей разработки включаем в образ только то, что нужно для разработки (см. Dockerfile)
+      target: dev
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.eshop-nuxt.rule=Host(`eshop-nuxt.docker`)"
+      - "traefik.docker.network=${TRAEFIK_NETWORK_NAME}"
+    networks:
+      - traefik
+    volumes:
+      - ./frontend-nuxt:/usr/frontend
+#    Чтобы работать без Traefik, нужно пробросить порт на хост-машину
+#    ports:
+#      - 5000:5000
+
+  node-react:
+    build:
+      # Для целей разработки включаем в образ только то, что нужно для разработки (см. Dockerfile)
+      target: dev
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.eshop-react.rule=Host(`eshop-react.docker`)"
+      - "traefik.docker.network=${TRAEFIK_NETWORK_NAME}"
+    networks:
+      - traefik
+    volumes:
+      - ./frontend-react:/usr/frontend
+  #    Чтобы работать без Traefik, нужно пробросить порт на хост-машину
+  #    ports:
+  #      - 5000:5000
+
+  backend:
+    build:
+      # Для целей разработки включаем в образ только то, что нужно для разработки (см. Dockerfile)
+      target: dev
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api-eshop.rule=Host(`eshop.docker:3001`)"
+      - "traefik.docker.network=${TRAEFIK_NETWORK_NAME}"
+    networks:
+      - traefik
+    volumes:
+      - ./backend:/usr/backend
+    ports:
+      - 3001:3000
+
+  #    Чтобы работать без Traefik, нужно пробросить порт на хост-машину
+  #    ports:
+  #      - 5000:5000
+
+
+#  ngrok:
+#    build:
+#      context: docker/ngrok
+#      args:
+#        AUTH_TOKEN: ${NGROK_TOKEN}
+#    depends_on:
+#      - node
+#    networks:
+#      - bridge
+#      - traefik

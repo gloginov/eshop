@@ -1,0 +1,107 @@
+version: '3.7'
+#
+#volumes:
+#  redis:
+#    driver: ${VOLUMES_DRIVER}
+
+networks:
+  bridge: ~
+  traefik:
+    external: true
+    name: ${TRAEFIK_NETWORK_NAME}
+
+# Internal communications
+#  frontend: ~
+
+#  Backend API. Нужна, только если мы общаемся с API через сеть Docker.
+#  backend:
+#    external:
+#      name: name_backend
+
+services:
+
+  ### Redis ################################################
+#  redis:
+#    build: ./docker/redis
+#    volumes:
+#      - ${DATA_PATH_HOST}/redis:/data
+#    networks:
+##      - traefik
+#      - bridge
+
+  mysql:
+    user: mysql
+    hostname: mysql_backend
+    build:
+      context: .docker/mysql
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - TZ=${WORKSPACE_TIMEZONE}
+    ports:
+      - ${MYSQL_HOST_PORT}:3306
+    networks:
+      - bridge
+    volumes:
+      - ./mysql:/var/lib/mysql
+      - .docker/mysql/initdb:/docker-entrypoint-initdb.d
+
+
+  node-nuxt:
+    #    depends_on:
+    #      - redis
+    build:
+      # Для сборки готового образа нам понадобится скопировать исходники в образ при сборке, поэтому контекст -
+      # каталог проекта
+      context: .
+      dockerfile: .docker/node-nuxt/Dockerfile
+      # По умолчанию собираем готовый образ приложения (т.е. образ с готовой и настренной сборкой, см. Dockerfile)
+      target: app
+    networks:
+      - bridge
+    env_file:
+      - .env
+#    links:
+#      - redis
+#      - backend
+
+  node-react:
+    #    depends_on:
+    #      - redis
+    build:
+      # Для сборки готового образа нам понадобится скопировать исходники в образ при сборке, поэтому контекст -
+      # каталог проекта
+      context: .
+      dockerfile: .docker/node-react/Dockerfile
+      # По умолчанию собираем готовый образ приложения (т.е. образ с готовой и настренной сборкой, см. Dockerfile)
+      target: app
+    networks:
+      - bridge
+    env_file:
+      - .env
+  #    links:
+  #      - redis
+  #      - backend
+
+  backend:
+    depends_on:
+      - node-react
+      - node-nuxt
+      - mysql
+    #      - redis
+    build:
+      # Для сборки готового образа нам понадобится скопировать исходники в образ при сборке, поэтому контекст -
+      # каталог проекта
+      context: .
+      dockerfile: .docker/backendjs/Dockerfile
+      # По умолчанию собираем готовый образ приложения (т.е. образ с готовой и настренной сборкой, см. Dockerfile)
+      target: app
+    networks:
+      - bridge
+    env_file:
+      - .env
+  #    links:
+  #      - redis
+  #      - backend

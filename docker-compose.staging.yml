@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  node:
+    image: ${APP_IMAGE}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=${TRAEFIK_NETWORK_NAME}"
+      # Main router (https)
+      - "traefik.http.routers.starteam_https.entrypoints=websecure"
+      - "traefik.http.routers.starteam_https.rule=Host(`lgdev.ru`) || Host(`www.lgdev.ru`)"
+      - "traefik.http.routers.starteam_https.tls=true"
+      - "traefik.http.routers.starteam_https.tls.certresolver=default"
+      - "traefik.http.routers.starteam_https.middlewares=chain_middlewares"
+      # Http middlewares
+      - "traefik.http.middlewares.httpsredirect.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.httpsredirect.redirectscheme.permanent=true"
+#      - "traefik.http.middlewares.popcorn_staging_auth.basicauth.users=accurateweb:$$2y$$05$$Mb1/j8AfMzDszY3cUZHvgOHSKCdibx.eIB3TamK5qHjgBEx6RHEuW"
+      - "traefik.http.middlewares.wwwtononwww.redirectregex.regex=^https?://(?:www\\.)?(.+)"
+      - "traefik.http.middlewares.wwwtononwww.redirectregex.replacement=https://$${1}"
+      - "traefik.http.middlewares.wwwtononwww.redirectregex.permanent=true"
+      - "traefik.http.middlewares.chain_middlewares.chain.middlewares=wwwtononwww,httpsredirect"
+      # Redirect http to https
+      - "traefik.http.routers.starteam_http.entrypoints=web"
+      - "traefik.http.routers.starteam_http.rule=Host(`lgdev.ru`) || Host(`www.lgdev.ru`)"
+      - "traefik.http.routers.starteam_http.middlewares=chain_middlewares"
+    networks:
+      - traefik
+#    Чтобы работать без Traefik, нужно пробросить порт на хост-машину
+#    ports:
+#      - 5000:5000
