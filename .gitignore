@@ -4,3 +4,6 @@
 
 /frontend-nuxt/node_modules/
 /frontend-nuxt/package-lock.json
+
+/backend/node_modules/
+/backend/package-lock.json
