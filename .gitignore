@@ -1,1 +1,12 @@
 .idea
+/frontend-react/node_modules/
+/frontend-react/package-lock.json
+
+/frontend-nuxt/node_modules/
+/frontend-nuxt/package-lock.json
+
+/backend/node_modules/
+/backend/package-lock.json
+
+/mysql
+/backend/.adminjs/
