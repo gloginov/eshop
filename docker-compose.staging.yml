@@ -15,7 +15,6 @@ services:
       # Http middlewares
       - "traefik.http.middlewares.httpsredirect.redirectscheme.scheme=https"
       - "traefik.http.middlewares.httpsredirect.redirectscheme.permanent=true"
-#      - "traefik.http.middlewares.popcorn_staging_auth.basicauth.users=accurateweb:$$2y$$05$$Mb1/j8AfMzDszY3cUZHvgOHSKCdibx.eIB3TamK5qHjgBEx6RHEuW"
       - "traefik.http.middlewares.wwwtononwww.redirectregex.regex=^https?://(?:www\\.)?(.+)"
       - "traefik.http.middlewares.wwwtononwww.redirectregex.replacement=https://$${1}"
       - "traefik.http.middlewares.wwwtononwww.redirectregex.permanent=true"
