@@ -1,4 +1,5 @@
 npm install
+
 #npm run dev
 #npm run dev
 
@@ -10,4 +11,4 @@ npm install
 #
 #exec "$@"
 
-#CMD ["node"]
+CMD ["node", "app.js"]

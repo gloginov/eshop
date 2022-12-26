@@ -42,6 +42,6 @@ FROM base AS dev
 ADD .docker/node-nuxt/start.sh /start.sh
 RUN chmod 775 /start.sh
 
-#ENTRYPOINT "/start.sh"
+ENTRYPOINT "/start.sh"
 #CMD ["npm"]
 CMD /bin/bash -c "tail -f /dev/null"

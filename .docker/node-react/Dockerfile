@@ -8,13 +8,13 @@ RUN #npm install -g nodemon
 RUN mkdir -p /usr/frontend
 WORKDIR /usr/frontend
 
-EXPOSE 5000
+EXPOSE 3000
 
 # set app serving to permissive / assigned
 ENV NUXT_HOST=0.0.0.0
 
 # set app port
-ENV NUXT_PORT=5000
+ENV NUXT_PORT=3000
 
 ############################################
 # Этот этап используется для развертывания #
@@ -42,6 +42,6 @@ FROM base AS dev
 ADD .docker/node-react/start.sh /start.sh
 RUN chmod 775 /start.sh
 
-#ENTRYPOINT "/start.sh"
+ENTRYPOINT "/start.sh"
 #CMD ["npm"]
 CMD /bin/bash -c "tail -f /dev/null"
