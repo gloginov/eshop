@@ -10,5 +10,6 @@ npm install
 #fi
 #
 #exec "$@"
-
-CMD ["node", "app.js"]
+! /bin/bash
+#CMD ["node", "app.js"]
+node app.mjs
