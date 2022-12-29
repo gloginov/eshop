@@ -10,7 +10,7 @@ routerProduct.post("/product", jsonParser, createProduct);
 // Retrieve all product
 routerProduct.get("/product", jsonParser, findAll);
 // Retrieve all published product
-routerProduct.get("/product/published", jsonParser, findAllPublished);
+routerProduct.get("/product/available", jsonParser, findAllPublished);
 // Retrieve a single Product with id
 routerProduct.get("/product/:id", jsonParser, findOne);
 // Update a Product with id
@@ -18,6 +18,6 @@ routerProduct.put("/product/:id", jsonParser, updateProduct);
 // Delete a Product with id
 routerProduct.delete("/product/:id", jsonParser, deleteProduct);
 // Delete all product
-routerProduct.delete("/product/", jsonParser, deleteAll);
+routerProduct.delete("/product", jsonParser, deleteAll);
 
 export default routerProduct;

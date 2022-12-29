@@ -1,7 +1,7 @@
 import db from '../models/index.mjs';
 const Product = db.products;
 
-// Create and Save a new Tutorial
+// Create and Save a new Product
 const createProduct = (req, res) => {
 // Validate request
   console.log(req);
@@ -77,14 +77,20 @@ const findOne = (req, res) => {
 };
 
 const findAllPublished = (req, res) => {
-  Product.getAllPublished((err, data) => {
-    if (err)
+  Product.findAll({
+    where: {
+      "available": true
+    }
+  })
+    .then(data => {
+      res.send(data)
+    })
+    .catch(err => {
       res.status(500).send({
         message:
           err.message || "Some error occurred while retrieving tutorials."
       });
-    else res.send(data);
-  });
+    })
 };
 
 const updateProduct = (req, res) => {
@@ -127,8 +133,15 @@ const updateProduct = (req, res) => {
 };
 
 const deleteProduct = (req, res) => {
-  Product.remove(req.params.id, (err, data) => {
-    if (err) {
+  Product.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+    .then(data => {
+      res.send({ message: `Product ${req.params.id} was deleted successfully!` })
+    })
+    .catch(err => {
       if (err.kind === "not_found") {
         res.status(404).send({
           message: `Not found Tutorial with id ${req.params.id}.`
@@ -138,19 +151,22 @@ const deleteProduct = (req, res) => {
           message: "Could not delete Tutorial with id " + req.params.id
         });
       }
-    } else res.send({ message: `Tutorial was deleted successfully!` });
-  });
+    })
 };
 
 const deleteAll = (req, res) => {
-  Product.removeAll((err, data) => {
-    if (err)
+  Product.destroy({
+    truncate: true
+  })
+    .then(data => {
+      res.send({ message: `All Products were deleted successfully!` });
+    })
+    .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while removing all tutorials."
+          err.message || "Some error occurred while removing all products."
       });
-    else res.send({ message: `All Tutorials were deleted successfully!` });
-  });
+    })
 };
 
 export { createProduct, findAll, findOne, findAllPublished, updateProduct, deleteProduct, deleteAll };
