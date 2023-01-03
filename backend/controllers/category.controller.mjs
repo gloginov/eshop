@@ -1,8 +1,8 @@
 import db from '../models/index.mjs';
-const Product = db.products;
+const Category = db.categories;
 
 // Create and Save a new Product
-const createProduct = (req, res) => {
+const createCategory = (req, res) => {
 // Validate request
 //   console.log(req);
   if (!req.body.title) {
@@ -12,23 +12,16 @@ const createProduct = (req, res) => {
     return;
   }
   
-  // Create a Product
-  const product = {
+  // Create a Category
+  const category = {
     title: req.body.title,
     description: req.body.description,
-    published: req.body.published || false,
-    remainder: req.body.remainder || false,
     available: req.body.available || false,
-    discount: req.body.discount || false,
-    price: req.body.price || false,
-    oldPrice: req.body.oldPrice || false,
-    category: req.body.category || false,
-    storage: req.body.storage || false,
-    name: req.body.name || false
+    sticker: req.body.sticker
   };
   
-  // Save Product in the database
-  Product.create(product)
+  // Save category in the database
+  Category.create(category)
     .then(data => {
       res.send(data);
     })
@@ -41,7 +34,7 @@ const createProduct = (req, res) => {
 };
 
 const findAll = (req, res) => {
-  Product.findAll()
+  Category.findAll()
     .then(data => {
       res.send(data)
     })
@@ -55,7 +48,7 @@ const findAll = (req, res) => {
 };
 
 const findOne = (req, res) => {
-  Product.findOne({
+  Category.findOne({
     where: {
       id: req.params.id
     }
@@ -77,7 +70,7 @@ const findOne = (req, res) => {
 };
 
 const findAllPublished = (req, res) => {
-  Product.findAll({
+  Category.findAll({
     where: {
       "available": true
     }
@@ -93,7 +86,7 @@ const findAllPublished = (req, res) => {
     })
 };
 
-const updateProduct = (req, res) => {
+const updateCategory = (req, res) => {
   // Validate Request
   if (!req.body) {
     res.status(400).send({
@@ -101,7 +94,7 @@ const updateProduct = (req, res) => {
     });
   }
   
-  Product.update(req.body, {
+  Category.update(req.body, {
     where: {
       id: req.params.id
     },
@@ -110,7 +103,7 @@ const updateProduct = (req, res) => {
   })
     .then(data => {
       // res.send(data)
-      Product.findOne({
+      Category.findOne({
         where: {
           id: req.params.id
         }
@@ -132,8 +125,8 @@ const updateProduct = (req, res) => {
     })
 };
 
-const deleteProduct = (req, res) => {
-  Product.destroy({
+const deleteCategory = (req, res) => {
+  Category.destroy({
     where: {
       id: req.params.id
     }
@@ -155,7 +148,7 @@ const deleteProduct = (req, res) => {
 };
 
 const deleteAll = (req, res) => {
-  Product.destroy({
+  Category.destroy({
     truncate: true
   })
     .then(data => {
@@ -170,11 +163,11 @@ const deleteAll = (req, res) => {
 };
 
 export {
-  createProduct,
+  createCategory,
   findAll,
   findOne,
   findAllPublished,
-  updateProduct,
-  deleteProduct,
+  updateCategory,
+  deleteCategory,
   deleteAll
 };

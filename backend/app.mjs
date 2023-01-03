@@ -6,8 +6,10 @@ import db from "./models/index.mjs"
 import cors from "cors"
 import logger from "morgan"
 import bodyParser from "body-parser"
-import productRouter from "./routes/product.routes.mjs"
 
+import productRouter from "./routes/product.routes.mjs"
+import imageRoutes from "./routes/image.routes.mjs";
+import categoryRoutes from "./routes/category.routes.mjs";
 // worked port
 const PORT = 3000
 
@@ -16,11 +18,11 @@ const start = async () => {
   
   // Init Admin js backend dashboard
   const admin = new AdminJS({
-    databases: [db],
+    // databases: [db],
     resources: db.tables(),
     rootPath: '/admin'
   });
-  
+
   // parsers for any requests
   // create application/json parser
   const jsonParser = bodyParser.json()
@@ -44,9 +46,13 @@ const start = async () => {
     res.status(500).send("Something broke!");
   });
   // use routes
-  app.use(productRouter)
+  app.use(productRouter);
+  app.use(imageRoutes);
+  app.use(categoryRoutes);
+  
   //
-  db.sequelize.sync()
+  db.sequelize.sync({ force: true })
+  // db.sequelize.sync()
     .then(result => {
       console.log(result)
         app.listen(PORT, () => {

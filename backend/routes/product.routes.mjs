@@ -1,4 +1,12 @@
-import { createProduct, findAll, findOne, findAllPublished, updateProduct, deleteProduct, deleteAll } from "../controllers/product.controller.mjs"
+import {
+  createProduct,
+  findAll,
+  findOne,
+  findAllPublished,
+  updateProduct,
+  deleteProduct,
+  deleteAll
+} from "../controllers/product.controller.mjs"
 import express from 'express'
 import bodyParser from "body-parser"
 const jsonParser = bodyParser.json()

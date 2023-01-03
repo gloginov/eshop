@@ -1,12 +1,8 @@
 import Sequelize from "sequelize"
 import { sequelize } from "../db.mjs"
 
-const Product = sequelize.define('product', {
+const Category = sequelize.define('category', {
   title: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  name: {
     type: Sequelize.STRING,
     allowNull: false
   },
@@ -17,14 +13,10 @@ const Product = sequelize.define('product', {
   available: {
     type: Sequelize.BOOLEAN
   },
-  price: {
-    type: Sequelize.INTEGER,
+  sticker: {
+    type: Sequelize.STRING,
     allowNull: false
-  },
-  oldPrice: {
-    type: Sequelize.INTEGER,
-    allowNull: true
   }
 })
 
-export default Product;
+export default Category;

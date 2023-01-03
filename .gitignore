@@ -10,3 +10,6 @@
 
 /mysql
 /backend/.adminjs/
+
+/pgadmin
+/postgres

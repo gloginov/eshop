@@ -1,8 +1,8 @@
 import db from '../models/index.mjs';
-const Product = db.products;
+const Image = db.images;
 
 // Create and Save a new Product
-const createProduct = (req, res) => {
+const createImage = (req, res) => {
 // Validate request
 //   console.log(req);
   if (!req.body.title) {
@@ -13,22 +13,13 @@ const createProduct = (req, res) => {
   }
   
   // Create a Product
-  const product = {
+  const image = {
     title: req.body.title,
     description: req.body.description,
-    published: req.body.published || false,
-    remainder: req.body.remainder || false,
-    available: req.body.available || false,
-    discount: req.body.discount || false,
-    price: req.body.price || false,
-    oldPrice: req.body.oldPrice || false,
-    category: req.body.category || false,
-    storage: req.body.storage || false,
-    name: req.body.name || false
   };
   
   // Save Product in the database
-  Product.create(product)
+  Image.create(image)
     .then(data => {
       res.send(data);
     })
@@ -41,7 +32,7 @@ const createProduct = (req, res) => {
 };
 
 const findAll = (req, res) => {
-  Product.findAll()
+  Image.findAll()
     .then(data => {
       res.send(data)
     })
@@ -55,7 +46,7 @@ const findAll = (req, res) => {
 };
 
 const findOne = (req, res) => {
-  Product.findOne({
+  Image.findOne({
     where: {
       id: req.params.id
     }
@@ -77,7 +68,7 @@ const findOne = (req, res) => {
 };
 
 const findAllPublished = (req, res) => {
-  Product.findAll({
+  Image.findAll({
     where: {
       "available": true
     }
@@ -93,7 +84,7 @@ const findAllPublished = (req, res) => {
     })
 };
 
-const updateProduct = (req, res) => {
+const updateImage = (req, res) => {
   // Validate Request
   if (!req.body) {
     res.status(400).send({
@@ -101,7 +92,7 @@ const updateProduct = (req, res) => {
     });
   }
   
-  Product.update(req.body, {
+  Image.update(req.body, {
     where: {
       id: req.params.id
     },
@@ -132,8 +123,8 @@ const updateProduct = (req, res) => {
     })
 };
 
-const deleteProduct = (req, res) => {
-  Product.destroy({
+const deleteImage = (req, res) => {
+  Image.destroy({
     where: {
       id: req.params.id
     }
@@ -155,7 +146,7 @@ const deleteProduct = (req, res) => {
 };
 
 const deleteAll = (req, res) => {
-  Product.destroy({
+  Image.destroy({
     truncate: true
   })
     .then(data => {
@@ -169,12 +160,4 @@ const deleteAll = (req, res) => {
     })
 };
 
-export {
-  createProduct,
-  findAll,
-  findOne,
-  findAllPublished,
-  updateProduct,
-  deleteProduct,
-  deleteAll
-};
+export { createImage, findAll, findOne, findAllPublished, updateImage, deleteImage, deleteAll };

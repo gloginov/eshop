@@ -3,12 +3,16 @@ version: '3.7'
 #volumes:
 #  redis:
 #    driver: ${VOLUMES_DRIVER}
+volumes:
+  postgres:
+  pgadmin:
 
 networks:
   bridge: ~
   traefik:
     external: true
     name: ${TRAEFIK_NETWORK_NAME}
+  pgadmin:
 
 # Internal communications
 #  frontend: ~
@@ -28,6 +32,41 @@ services:
 #    networks:
 ##      - traefik
 #      - bridge
+
+  postgres:
+    user: postgres
+    build:
+      context: .docker/postgres
+    container_name: postgres_container
+    environment:
+      POSTGRES_USER: ${MYSQL_USER}
+      POSTGRES_PASSWORD: ${MYSQL_PASSWORD}
+#      PGDATA: /data/postgres
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres:/data/postgres
+#      - pg-data:/pg-data
+    ports:
+      - "5432:5432"
+    networks:
+      - bridge
+#    restart: unless-stopped
+
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${MYSQL_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: '123'
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - ./pgadmin:/var/lib/pgadmin
+
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    networks:
+      - bridge
+    restart: unless-stopped
 
   mysql:
     user: mysql
@@ -89,7 +128,8 @@ services:
     depends_on:
       - node-react
       - node-nuxt
-      - mysql
+      #      - mysql
+      - postgres
     #      - redis
     build:
       # Для сборки готового образа нам понадобится скопировать исходники в образ при сборке, поэтому контекст -

@@ -1,3 +1,15 @@
+antd UI lib https://ant.design/docs/react/introduce
+react 
+redux
+
+create
+-ui
+-layout
+-roles middleware
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
