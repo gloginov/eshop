@@ -1,5 +1,5 @@
 import './header.scss';
-import Logo from '../../images/entryshop.svg'
+import Logo from '../../images/entryshop_yellow.svg'
 import CustomInput from "../ui/CustomInput.tsx";
 
 const header = () => {

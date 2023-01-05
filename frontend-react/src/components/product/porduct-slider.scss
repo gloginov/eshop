@@ -1,0 +1,49 @@
+@import "../../scss/mixins";
+.product-slider {
+
+  &-list {
+
+  }
+
+  &-item {
+    width: 100%;
+    margin-bottom: 2rem;
+    position: relative;
+    cursor: pointer;
+
+    @include hoverLink;
+
+    &__image {
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      padding-bottom: 100%;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    &__slider {
+      width: 100%;
+      height: auto;
+
+      @include pos_absolute;
+    }
+
+    &__info {
+      margin-top: 1rem;
+    }
+
+    &__name {
+      display: block;
+    }
+
+    &__brand {
+      display: block;
+    }
+  }
+}

@@ -7,11 +7,30 @@
   right: 0;
 }
 
+@mixin pos_absolute {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
 @mixin hoverLink {
   cursor: pointer;
 
   &:hover {
     color: $c_theme_light;
-    text-decoration: underline;
+    //text-decoration: underline;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
