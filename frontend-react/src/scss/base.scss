@@ -8,3 +8,12 @@
 body {
   background: white;
 }
+
+// expanded row class
+.row {
+
+  &_carousel {
+    flex-flow: row;
+    overflow-x: scroll;
+  }
+}

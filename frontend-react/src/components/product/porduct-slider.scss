@@ -6,32 +6,63 @@
   }
 
   &-item {
+    @include hoverLink;
+
     width: 100%;
     margin-bottom: 2rem;
     position: relative;
     cursor: pointer;
 
-    @include hoverLink;
+    &__wrap-image {
+      border-radius: 8px;
+      overflow: hidden;
+    }
 
     &__image {
       width: 100%;
-      border-radius: 8px;
-      overflow: hidden;
       white-space: nowrap;
       position: relative;
-      padding-bottom: 100%;
+
+      // for square image width = height
+      &:after {
+        content: '';
+        position: relative;
+        padding-bottom: 100%;
+        width: 100%;
+        display: block;
+      }
 
       img {
         width: 100%;
         height: auto;
+        border-radius: 8px;
+        overflow: hidden;
       }
     }
 
     &__slider {
-      width: 100%;
-      height: auto;
-
       @include pos_absolute;
+
+      width: 100%;
+      height: 100%;
+
+      .slick-slider, .slick-list, .slick-track {
+        height: 100%;
+      }
+
+      // this hack for safari
+      .slick-track .slick-slide {
+        border-radius: 8px;
+        overflow: hidden;
+
+        & > div {
+          height: 100%;
+
+          img {
+            border-radius: 0;
+          }
+        }
+      }
     }
 
     &__info {
@@ -43,7 +74,15 @@
     }
 
     &__brand {
+      margin-top: .5rem;
       display: block;
+      opacity: .3;
+      color: $c_black;
+    }
+
+    &_black {
+
+      @include hoverLinkGray;
     }
   }
 }

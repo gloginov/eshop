@@ -19,7 +19,14 @@
 
   &:hover {
     color: $c_theme_light;
-    //text-decoration: underline;
+  }
+}
+
+@mixin hoverLinkGray {
+  cursor: pointer;
+
+  &:hover {
+    color: $c_gray_light;
   }
 }
 

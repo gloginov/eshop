@@ -1,30 +1,35 @@
 import BaseLayout from "../components/layouts/BaseLayout.tsx";
+import HeaderImage from "../components/blocks/header-image.tsx";
 import ProductSlider from "../components/product/product-slider.tsx";
-import HeaderImage from '../images/gass-image.jpeg'
 
 export default function MainPage() {
 
   return (
     <BaseLayout>
-      <section className="section section-header">
-        <div className="block-banner">
-          <img src={HeaderImage} alt=""/>
-          <div className="row middle-xs">
-            <div className="col-xs-offset-6 col-xs-6">
-              <div className="block-banner__wrap">
-                <h1>Carry your Funk</h1>
-                <p>Trendy handbags collection for your party animal</p>
-                <button className="button">
-                  <span>See more</span>
-                </button>
+      <HeaderImage />
+      <ProductSlider title="New Arrivals"/>
+      <ProductSlider bgColor={true} title="Handpicked Collections "/>
+      <div className="section section-product-collection">
+        <div className="container">
+          <div className="proposed-category">
+            <div className="row">
+              <div className="col-xs-12">
+                <div className="proposed-category__item">
+
+                </div>
+              </div>
+
+              <div className="col-xs-6">
+
+              </div>
+
+              <div className="col-xs-6">
+
               </div>
             </div>
           </div>
         </div>
-      </section>
-
-      <ProductSlider />
-
+      </div>
     </BaseLayout>
   )
 }

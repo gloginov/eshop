@@ -38,8 +38,18 @@ main {
   }
 }
 
+
+
 section.section {
-  margin-bottom: 68px;
+  margin-bottom: 40px;
+
+  &:not(.section-header) {
+    padding-top: 18px;
+  }
+
+  &-theme-bg {
+    background: $g_theme_gradient;
+  }
 
   &-header {
     background-color: #40464b;
