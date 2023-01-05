@@ -1,0 +1,10 @@
+@import "vars";
+
+.container {
+  max-width: $max-width-container;
+  //padding: 0 $site-padding;
+}
+
+body {
+  background: white;
+}

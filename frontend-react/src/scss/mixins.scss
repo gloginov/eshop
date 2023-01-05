@@ -1,0 +1,17 @@
+@import "vars";
+
+@mixin pos_fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+@mixin hoverLink {
+  cursor: pointer;
+
+  &:hover {
+    color: $c_theme_light;
+    text-decoration: underline;
+  }
+}

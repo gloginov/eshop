@@ -1,0 +1,45 @@
+@import "./src/scss/mixins.scss";
+@import "./src/scss/vars.scss";
+
+.header {
+  @include pos_fixed;
+
+  height: $header_height;
+
+  &-logo {
+    height: 65px;
+    width: auto;
+    margin-right: 2rem;
+    position: relative;
+    top: 10px;
+  }
+
+  &-controls {
+
+    &__person {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      border: 2px solid $c_theme;
+      display: block;
+    }
+  }
+
+  &-menu {
+    display: flex;
+    flex-flow: row;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    align-items: center;
+
+    &__item {
+      @include hoverLink;
+
+      list-style: none;
+      margin-right: 1rem;
+      white-space: nowrap;
+    }
+  }
+}
