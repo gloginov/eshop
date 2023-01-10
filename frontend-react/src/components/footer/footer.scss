@@ -1,0 +1,73 @@
+@import "../../scss/mixins";
+@import "../../scss/vars";
+
+.footer {
+  background: $g_theme_gradient;
+  width: 100%;
+  min-height: 100px;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  position: relative;
+
+  .sitemap {
+
+    a {display: block}
+
+    &__link-head {
+      color: $c_black;
+
+      @include hoverLinkGray;
+    }
+
+    &__link-child {
+      color: $c_black;
+      opacity: .4;
+      font-weight: 200;
+
+      @include hoverLinkGray;
+    }
+  }
+
+  .social {
+
+    &s {
+      display: flex;
+      flex-flow: row;
+      justify-content: space-between;
+    }
+
+    &-icon {
+      color: white;
+      transition: color .2s linear;
+      //margin: 0 1rem;
+
+      &:hover {
+        color: $c_gray_light;
+      }
+    }
+  }
+
+  .copyright {
+    border-top: 1px solid $c_gray_light;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+
+    a {
+      display: block;
+      text-align: center;
+      font-weight: 200;
+      color: $c_gray_light;
+      padding-top: 1rem;
+      margin-bottom: 1rem;
+
+      //@include hoverLinkGray;
+
+      &:hover {
+        color: $c_black;
+      }
+    }
+  }
+}

@@ -1,3 +1,4 @@
+@import "mixins";
 html, body {
   font-family: $font-family-base;
   font-weight: 200;
@@ -9,3 +10,9 @@ h1, h2, h3, h4, h5 {
   line-height: 1.2;
 }
 
+a.link {
+  color: $c_black;
+  font-weight: 100;
+
+  @include hoverLink;
+}

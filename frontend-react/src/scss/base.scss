@@ -5,8 +5,23 @@
   //padding: 0 $site-padding;
 }
 
-body {
+html, body {
+  height: 100%;
   background: white;
+}
+
+.applicationContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .wrapper {
+    flex: 1 0 auto;
+  }
+
+  .footer {
+    flex: 0 0 auto;
+  }
 }
 
 // expanded row class
