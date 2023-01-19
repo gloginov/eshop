@@ -1,0 +1,9 @@
+FROM node:15.5
+
+#RUN npm i -g gulp@4.0.2 && npm i -g webpack@5.9.0 && npm i -g webpack-cli@4.2.0
+
+#RUN npm i -g eslint
+
+WORKDIR /var/www
+
+CMD /bin/bash -c "tail -f /dev/null"

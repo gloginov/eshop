@@ -9,3 +9,7 @@
 /backend/package-lock.json
 
 /mysql
+/backend/.adminjs/
+
+/pgadmin
+/postgres

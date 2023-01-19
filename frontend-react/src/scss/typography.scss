@@ -1,0 +1,18 @@
+@import "mixins";
+html, body {
+  font-family: $font-family-base;
+  font-weight: 200;
+  letter-spacing: 2px;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: $font-family-title;
+  line-height: 1.2;
+}
+
+a.link {
+  color: $c_black;
+  font-weight: 100;
+
+  @include hoverLink;
+}

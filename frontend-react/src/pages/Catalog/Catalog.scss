@@ -1,0 +1,90 @@
+.sidebar-menu {
+  position: relative;
+  width: 286px;
+  height: 100%;
+  margin-top: 20px;
+  margin-left: 20px;
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+
+      .fa {
+        font-size: 16px;
+        text-align: center;
+        float: right;
+      }
+
+      a {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        display: block;
+        padding: 5px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+        color: #333;
+        text-decoration: none;
+      }
+
+      ul {
+
+        label {
+          font-family: 'Inter';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 20px;
+          display: inline-block;
+          padding: 5px;
+          color: #333;
+          text-decoration: none;
+        }
+
+        .checkbox {
+          display: none;
+        }
+
+        .fake {
+          display: inline-block;
+          top: 3px;
+          width: 15px;
+          height: 15px;
+          border: 1px solid rgba(0, 0, 0, 0.9);
+          border-radius: 2px;
+          margin-right: 8px;
+          position: relative;
+        }
+
+        .fake::before {
+          content: "";
+          position: absolute;
+          display: block;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 10px;
+          height: 10px;
+          background-color: #f1c400;
+          opacity: 0;
+          transition: .2s;
+        }
+
+        .checkbox:checked + .fake::before {
+          opacity: 1;
+        }
+
+      }
+
+    }
+  }
+}
+
+
+
+
+
