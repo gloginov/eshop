@@ -1,9 +1,21 @@
+.menu-title {
+  margin-left: 20px;
+  h1 {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 44px;
+    text-transform: none;
+  }
+
+}
+
 .sidebar-menu {
   position: relative;
   width: 286px;
   height: 100%;
-  margin-top: 20px;
-  margin-left: 20px;
+  margin-left: 12px;
 
   ul {
     list-style: none;
